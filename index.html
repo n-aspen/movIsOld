@@ -2,6 +2,8 @@
   <head>
     <title>Is mov old tho??</title>
   </head>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.js" integrity="sha512-STI3jX2gEOm2Z4JLWBX1XqsXzHLXmK9H+c94IBv3AfM/w2w3zQfP05EZ/Zi4P/uBajPi2SAmdFxQ1UWQtt7gsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
   <style>
     .countup {
@@ -40,26 +42,28 @@
   
   <script>
     window.onload = function() {
-  // Month Day, Year Hour:Minute:Second, id-of-element-container
-  countUpFromTime("Dec 15, 1998 01:11:17", 'countup1'); // ****** Change this line!
-};
-function countUpFromTime(countFrom, id) {
-  countFrom = new Date(countFrom).getTime();
-  var now = new Date(),
-      countFrom = new Date(countFrom),
-      timeDifference = (now - countFrom);
+      //start counting cycle
+      countUpFromTime('countup1');
+    };
+function countUpFromTime(id) {
     
-  var secondsInADay = 60 * 60 * 1000 * 24,
-      secondsInAHour = 60 * 60 * 1000;
-    
-  days = Math.floor(timeDifference / (secondsInADay) * 1);
-  years = Math.floor(days / 365);
-  if (years > 1){ days = days - (years * 365) }
-  hours = Math.floor((timeDifference % (secondsInADay)) / (secondsInAHour) * 1);
-  mins = Math.floor(((timeDifference % (secondsInADay)) % (secondsInAHour)) / (60 * 1000) * 1);
-  secs = Math.floor((((timeDifference % (secondsInADay)) % (secondsInAHour)) % (60 * 1000)) / 1000 * 1);
+  //define birthday as a moment
+  var BirthDay = moment("12-15-1998 01:11:00", "MM-DD-YYYY hh:mm:ss");
+  //get current date as a moment
+  var momentNow = moment();
+  //get difference as a positive difference
+  var sinceBirthDay = moment.duration(momentNow.diff(BirthDay))
 
+  //store/parse years,days,hours,minutes, and seconds every cycle
+  years = Math.floor(sinceBirthDay.get('years'));
+  days = Math.floor(sinceBirthDay.get('days'));
+  hours = Math.floor(sinceBirthDay.get('hours'));
+  mins = Math.floor(sinceBirthDay.get('minutes'));
+  secs = Math.floor(sinceBirthDay.get('seconds'));
+
+  //target the countup element
   var idEl = document.getElementById(id);
+  //place the updated time values in their correct slots
   idEl.getElementsByClassName('years')[0].innerHTML = years;
   idEl.getElementsByClassName('days')[0].innerHTML = days;
   idEl.getElementsByClassName('hours')[0].innerHTML = hours;
@@ -67,7 +71,7 @@ function countUpFromTime(countFrom, id) {
   idEl.getElementsByClassName('seconds')[0].innerHTML = secs;
 
   clearTimeout(countUpFromTime.interval);
-  countUpFromTime.interval = setTimeout(function(){ countUpFromTime(countFrom, id); }, 1000);
+  countUpFromTime.interval = setTimeout(function(){ countUpFromTime(id); }, 500);
 }
   </script>
     <body>
