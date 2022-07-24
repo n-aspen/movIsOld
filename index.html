@@ -2,6 +2,8 @@
   <head>
     <title>Is mov old tho??</title>
 
+    <link rel="stylesheet" href="AgeCounter.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.js" integrity="sha512-STI3jX2gEOm2Z4JLWBX1XqsXzHLXmK9H+c94IBv3AfM/w2w3zQfP05EZ/Zi4P/uBajPi2SAmdFxQ1UWQtt7gsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
 
@@ -16,26 +18,40 @@ function countUpFromTime(id) {
     
   //define birthday as a moment
   var BirthDay = moment("12-15-1998 01:11:00", "MM-DD-YYYY hh:mm:ss");
+
+  var HRTday = moment("9-23-2021", "MM-DD-YYYY");
   //get current date as a moment
   var momentNow = moment();
   //get difference as a positive difference
   var sinceBirthDay = moment.duration(momentNow.diff(BirthDay))
+  var sinceHRTDay = moment.duration(momentNow.diff(HRTday))
 
   //store/parse years,days,hours,minutes, and seconds every cycle
   years = Math.floor(sinceBirthDay.get('years'));
+  months = Math.floor(sinceBirthDay.get('months'));
   days = Math.floor(sinceBirthDay.get('days'));
   hours = Math.floor(sinceBirthDay.get('hours'));
   mins = Math.floor(sinceBirthDay.get('minutes'));
   secs = Math.floor(sinceBirthDay.get('seconds'));
 
+  HRTyears = Math.floor(sinceHRTDay.get('years'));
+  HRTmonths = Math.floor(sinceHRTDay.get('months'));
+  HRTdays = Math.floor(sinceHRTDay.get('days'));
+
   //target the countup element
   var idEl = document.getElementById(id);
   //place the updated time values in their correct slots
   idEl.getElementsByClassName('years')[0].innerHTML = years;
+  idEl.getElementsByClassName('months')[0].innerHTML = months;
   idEl.getElementsByClassName('days')[0].innerHTML = days;
   idEl.getElementsByClassName('hours')[0].innerHTML = hours;
   idEl.getElementsByClassName('minutes')[0].innerHTML = mins;
   idEl.getElementsByClassName('seconds')[0].innerHTML = secs;
+
+  idEl.getElementsByClassName('HRTyears')[0].innerHTML = HRTyears;
+  idEl.getElementsByClassName('HRTmonths')[0].innerHTML = HRTmonths;
+  idEl.getElementsByClassName('HRTdays')[0].innerHTML = HRTdays;
+  idEl.getElementsByClassName('HRTallDays')[0].innerHTML = "(" + momentNow.diff(HRTday, 'days') + " total days)";
 
   clearTimeout(countUpFromTime.interval);
   countUpFromTime.interval = setTimeout(function(){ countUpFromTime(id); }, 500);
@@ -57,26 +73,9 @@ function countUpFromTime(id) {
       width: 99vw;
       height: 99vh;
     }
-    .countup {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .countup .timeel {
-      display: inline-block;
-      padding: 10px;
-      background: #151515;
-      margin: 0;
-      color: white;
-      min-width: 2.6rem;
-      margin-left: 13px;
-      border-radius: 10px 0 0 10px;
-    }
 
-    .countup span[class*="timeRef"] {
-      border-radius: 0 10px 10px 0;
-      margin-left: 0;
-      background: #CF9E11;
-      color: black;
+    div.center{
+      text-align: center;
     }
 
     div{
@@ -91,38 +90,32 @@ function countUpFromTime(id) {
       background-color: #292929;
       color: #D4D4D4;
     }
-
-    span.dateStart {
-      border-radius: 10px 0 0 10px;
-      margin: 0;
-      padding: 0 .3%;
-      background: #CF9E11;
-      color: black;
-    }
-
-    span.dateMiddle {
-      margin: 0;
-      padding: 0 .3%;
-      background: black;
-      color:white;
-    }
-
-    span.dateEnd {
-      border-radius: 0 10px 10px 0;
-      margin: 0;
-      padding: 0 .3%;
-      background: #CF9E11;
-      color: black;
-    }
   </style>
 
     <body>
+    
+      
+      <!--Birthday Counter-->
       <div class="countup" id="countup1">
-        <h1>with a birthday of <span class="dateStart">December</span> <span class="dateMiddle">15th</span> <span class="dateEnd">1998</span> </h1> 
+
+        <div class="center transPride">
+          <p>HRT Day: <span style="font-weight: bold;">23rd of September, 2021</span></p>
+          <span class="HRTyears">0</span>
+          <span class="HRTYearsMarker">years</span>
+          <span class="HRTmonths">0</span>
+          <span class="HRTMonthsMarker">months</span>
+          <span class="HRTdays">0</span>
+          <span class="HRTDaysMarker">days </span>
+          <span class="HRTallDays">(0)</span>
+        </div>
+
+        <h1>With a birthday of <span class="dateStart">December</span> <span class="dateMiddle">15th</span> <span class="dateEnd">1998</span> </h1> 
         <h1>mov51 is this old:</h1>
   
         <span class="timeel years">00</span>
         <span class="timeel timeRefYears">years</span>
+        <span class="timeel months">00</span>
+        <span class="timeel timeRefMonths">months</span>
         <span class="timeel days">00</span>
         <span class="timeel timeRefDays">days</span>
         <span class="timeel hours">00</span>

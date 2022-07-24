@@ -1,0 +1,44 @@
+.countup {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .countup .timeel {
+    display: inline-block;
+    padding: 10px;
+    background: #151515;
+    margin: 0;
+    color: white;
+    min-width: 2.6rem;
+    margin-left: 13px;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .countup span[class*="timeRef"] {
+    border-radius: 0 10px 10px 0;
+    margin-left: 0;
+    background: #CF9E11;
+    color: black;
+  }
+
+span.dateStart {
+    border-radius: 10px 0 0 10px;
+    margin: 0;
+    padding: 0 .3%;
+    background: #CF9E11;
+    color: black;
+  }
+
+  span.dateMiddle {
+    margin: 0;
+    padding: 0 .3%;
+    background: black;
+    color:white;
+  }
+
+  span.dateEnd {
+    border-radius: 0 10px 10px 0;
+    margin: 0;
+    padding: 0 .3%;
+    background: #CF9E11;
+    color: black;
+  }
